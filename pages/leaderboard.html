@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — GeoR.xyz</title>
+  <meta name="description" content="GeoR global leaderboard. Top creators, most active countries, most drawn territories and trending zones." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { overflow: auto; height: auto; }
+    .tabs { display: flex; gap: 4px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab-btn {
+      background: var(--bg-raised); border: 1px solid var(--border);
+      color: var(--text-secondary); padding: 8px 18px; border-radius: 6px;
+      font-family: var(--font-display); font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--accent-cyan); color: #000; border-color: var(--accent-cyan);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .podium { display: flex; justify-content: center; align-items: flex-end; gap: 16px; margin: 32px 0; }
+    .podium-item { text-align: center; }
+    .podium-platform {
+      border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 20px; font-weight: 900; color: #000;
+    }
+    .pod-1 .podium-platform { background: var(--accent-yellow); width: 100px; height: 80px; }
+    .pod-2 .podium-platform { background: #aaaaaa; width: 90px; height: 60px; }
+    .pod-3 .podium-platform { background: #cd7f32; width: 80px; height: 40px; }
+    .podium-name { font-size: 12px; color: var(--text-secondary); margin-top: 8px; font-family: var(--font-mono); }
+    .podium-pts { font-size: 11px; color: var(--accent-cyan); font-family: var(--font-mono); }
+    .badge { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 10px; font-weight: 700; font-family: var(--font-mono); }
+    .badge-gold { background: var(--accent-yellow); color: #000; }
+    .badge-creator { background: var(--accent-cyan); color: #000; }
+    .badge-battle { background: var(--accent-red); color: #fff; }
+    .badge-legend { background: var(--accent-purple); color: #fff; }
+    .trophy-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .trophy-item {
+      background: var(--bg-raised); border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; flex: 1; min-width: 150px; text-align: center;
+    }
+    .trophy-item .ti { font-size: 28px; display: block; margin-bottom: 6px; }
+    .trophy-item .tn { font-size: 12px; color: var(--text-secondary); }
+    .trophy-item .tv { font-family: var(--font-display); font-size: 15px; color: var(--accent-cyan); display: block; margin-top: 4px; }
+  </style>
+</head>
+<body class="subpage-body">
+<div class="noise-overlay"></div>
+
+<header id="main-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <a href="../index.html" class="logo-link">
+        <span class="logo-geo">Geo</span><span class="logo-r">R</span>
+        <span class="logo-dot">·</span><span class="logo-xyz">xyz</span>
+      </a>
+    </div>
+    <nav class="main-nav">
+      <a href="../index.html" class="nav-link">Canvas</a>
+      <a href="worldmap.html" class="nav-link">World Map</a>
+      <a href="leaderboard.html" class="nav-link active">Rankings</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="history.html" class="nav-link">History</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="../index.html" class="btn-join">Open Canvas</a>
+    </div>
+  </div>
+</header>
+
+<main style="margin-top:60px; padding: 40px 24px; max-width: 1100px; margin-left:auto; margin-right:auto;">
+  <div class="page-hero">
+    <h1>👑 <span>Leaderboard</span></h1>
+    <p>The world's top creators, most active countries, and fiercest competitors. Updated every minute.</p>
+  </div>
+
+  <!-- Season Trophy Stats -->
+  <div class="trophy-row">
+    <div class="trophy-item"><span class="ti">🏆</span><span class="tn">Season Champion</span><span class="tv">PixelKing_BR</span></div>
+    <div class="trophy-item"><span class="ti">🌍</span><span class="tn">Top Nation</span><span class="tv">🇧🇷 Brazil</span></div>
+    <div class="trophy-item"><span class="ti">⚔️</span><span class="tn">Most Battles Won</span><span class="tv">NeonTokyo</span></div>
+    <div class="trophy-item"><span class="ti">🎨</span><span class="tn">Most Creative</span><span class="tv">SaharaInk</span></div>
+    <div class="trophy-item"><span class="ti">⚡</span><span class="tn">Fastest Drawer</span><span class="tv">SeoulPixel</span></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('creators')">Top Creators</button>
+    <button class="tab-btn" onclick="switchTab('countries')">Countries</button>
+    <button class="tab-btn" onclick="switchTab('territories')">Territories</button>
+    <button class="tab-btn" onclick="switchTab('daily')">Daily</button>
+  </div>
+
+  <!-- TOP CREATORS -->
+  <div class="tab-content active" id="tab-creators">
+    <div class="section-card">
+      <h2>🎨 Top Creators — All Time</h2>
+      <!-- Podium -->
+      <div class="podium">
+        <div class="podium-item pod-2">
+          <div class="podium-platform">2</div>
+          <div class="podium-name">🇯🇵 NeonTokyo</div>
+          <div class="podium-pts">98,421 pts</div>
+        </div>
+        <div class="podium-item pod-1">
+          <div class="podium-platform">1</div>
+          <div class="podium-name">🇧🇷 PixelKing_BR</div>
+          <div class="podium-pts">142,837 pts</div>
+        </div>
+        <div class="podium-item pod-3">
+          <div class="podium-platform">3</div>
+          <div class="podium-name">🇺🇸 WallStreetArt</div>
+          <div class="podium-pts">87,654 pts</div>
+        </div>
+      </div>
+
+      <table class="lb-table">
+        <thead><tr><th>#</th><th>Creator</th><th>Country</th><th>Points</th><th>Pixels</th><th>Badges</th></tr></thead>
+        <tbody id="creatorsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COUNTRIES -->
+  <div class="tab-content" id="tab-countries">
+    <div class="section-card">
+      <h2>🌍 Country Rankings</h2>
+      <table class="lb-table">
+        <thead><tr><th>#</th><th>Country</th><th>Active Users</th><th>Total Pixels</th><th>Territories</th></tr></thead>
+        <tbody id="countriesBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TERRITORIES -->
+  <div class="tab-content" id="tab-territories">
+    <div class="section-card">
+      <h2>🗺️ Territory Rankings</h2>
+      <table class="lb-table">
+        <thead><tr><th>#</th><th>Territory</th><th>Owner</th><th>Defenders</th><th>Area</th></tr></thead>
+        <tbody id="territoriesBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DAILY -->
+  <div class="tab-content" id="tab-daily">
+    <div class="section-card">
+      <h2>⚡ Today's Champions</h2>
+      <table class="lb-table">
+        <thead><tr><th>#</th><th>Creator</th><th>Today's Points</th><th>Pixels Today</th></tr></thead>
+        <tbody id="dailyBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer class="main-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">GeoR<span class="footer-dot">·</span>xyz</span>
+      <p>GeoR.xyz is a global collaborative canvas where humanity can create, compete, communicate, and leave its mark together.</p>
+    </div>
+    <div class="footer-links"><h4>Navigate</h4><a href="../index.html">Canvas</a><a href="worldmap.html">World Map</a></div>
+    <div class="footer-links"><h4>Contact</h4><a href="contact.html">Contact Us</a><a href="#" class="footer-email">salatrir@gmail.com</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 GeoR.xyz</span></div>
+</footer>
+
+<script>
+const creators = [
+  { rank:1, name:'PixelKing_BR', flag:'🇧🇷', pts:'142,837', pixels:'2.1M', badges:['badge-gold','badge-legend'] },
+  { rank:2, name:'NeonTokyo', flag:'🇯🇵', pts:'98,421', pixels:'1.4M', badges:['badge-creator'] },
+  { rank:3, name:'WallStreetArt', flag:'🇺🇸', pts:'87,654', pixels:'1.2M', badges:['badge-battle'] },
+  { rank:4, name:'MoroccanBrush', flag:'🇲🇦', pts:'61,290', pixels:'887K', badges:['badge-creator'] },
+  { rank:5, name:'BerlinBrush', flag:'🇩🇪', pts:'54,112', pixels:'774K', badges:[] },
+  { rank:6, name:'SeoulPixel', flag:'🇰🇷', pts:'48,900', pixels:'698K', badges:['badge-battle'] },
+  { rank:7, name:'ParisGraffiti', flag:'🇫🇷', pts:'41,233', pixels:'601K', badges:['badge-creator'] },
+  { rank:8, name:'MumbaiMural', flag:'🇮🇳', pts:'37,880', pixels:'541K', badges:[] },
+  { rank:9, name:'CairoCanvas', flag:'🇪🇬', pts:'31,445', pixels:'449K', badges:[] },
+  { rank:10, name:'LagosLines', flag:'🇳🇬', pts:'28,010', pixels:'399K', badges:['badge-battle'] },
+];
+const badgeNames = { 'badge-gold':'🥇 Champion', 'badge-legend':'💫 Legend', 'badge-creator':'🎨 Creator', 'badge-battle':'⚔️ Warrior' };
+
+const cb = document.getElementById('creatorsBody');
+creators.forEach(c => {
+  const rankClass = c.rank===1?'rank-1':c.rank===2?'rank-2':c.rank===3?'rank-3':'';
+  const badges = c.badges.map(b => `<span class="badge ${b}">${badgeNames[b]}</span>`).join(' ');
+  cb.innerHTML += `<tr>
+    <td><span class="rank-badge ${rankClass}">#${c.rank}</span></td>
+    <td>${c.flag} ${c.name}</td>
+    <td>${c.flag}</td>
+    <td style="color:var(--accent-cyan);font-family:var(--font-mono)">${c.pts}</td>
+    <td style="font-family:var(--font-mono)">${c.pixels}</td>
+    <td>${badges}</td>
+  </tr>`;
+});
+
+const countryData = [
+  { flag:'🇧🇷', name:'Brazil', users:'742', pixels:'3.2M', territories:87 },
+  { flag:'🇺🇸', name:'United States', users:'631', pixels:'2.8M', territories:74 },
+  { flag:'🇯🇵', name:'Japan', users:'498', pixels:'2.1M', territories:58 },
+  { flag:'🇲🇦', name:'Morocco', users:'387', pixels:'1.7M', territories:44 },
+  { flag:'🇩🇪', name:'Germany', users:'312', pixels:'1.3M', territories:38 },
+  { flag:'🇫🇷', name:'France', users:'298', pixels:'1.2M', territories:35 },
+  { flag:'🇮🇳', name:'India', users:'275', pixels:'1.1M', territories:31 },
+  { flag:'🇰🇷', name:'South Korea', users:'241', pixels:'987K', territories:28 },
+];
+const co = document.getElementById('countriesBody');
+countryData.forEach((c,i) => {
+  const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'';
+  co.innerHTML += `<tr>
+    <td><span class="rank-badge ${rankClass}">#${i+1}</span></td>
+    <td>${c.flag} ${c.name}</td>
+    <td style="color:var(--accent-cyan);font-family:var(--font-mono)">${c.users}</td>
+    <td style="font-family:var(--font-mono)">${c.pixels}</td>
+    <td style="font-family:var(--font-mono)">${c.territories}</td>
+  </tr>`;
+});
+
+const territoryData = [
+  { name:'🌍 GeoR Center', owner:'PixelKing_BR', defenders:247, area:'600×400' },
+  { name:'⚔️ Battle Zone', owner:'Contested', defenders:189, area:'500×300' },
+  { name:'🇧🇷 Brasil Corner', owner:'BR_Alliance', defenders:142, area:'400×350' },
+  { name:'🇯🇵 Tokyo Pixel', owner:'NeonTokyo', defenders:98, area:'350×280' },
+  { name:'🇺🇸 USA Mural', owner:'WallStreetArt', defenders:87, area:'450×300' },
+  { name:'🇲🇦 Maroc Art', owner:'SaharaInk', defenders:71, area:'300×200' },
+];
+const tb = document.getElementById('territoriesBody');
+territoryData.forEach((t,i) => {
+  tb.innerHTML += `<tr>
+    <td><span class="rank-badge">#${i+1}</span></td>
+    <td>${t.name}</td>
+    <td style="color:var(--accent-cyan)">${t.owner}</td>
+    <td style="font-family:var(--font-mono)">${t.defenders}</td>
+    <td style="font-family:var(--font-mono);color:var(--text-dim)">${t.area}</td>
+  </tr>`;
+});
+
+const daily = [
+  ['PixelKing_BR','🇧🇷','8,471','142K'],
+  ['NeonTokyo','🇯🇵','6,213','98K'],
+  ['BerlinBrush','🇩🇪','5,890','88K'],
+  ['SeoulPixel','🇰🇷','4,102','61K'],
+  ['MoroccanBrush','🇲🇦','3,877','57K'],
+];
+const db = document.getElementById('dailyBody');
+daily.forEach((d,i) => {
+  const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'';
+  db.innerHTML += `<tr>
+    <td><span class="rank-badge ${rankClass}">#${i+1}</span></td>
+    <td>${d[1]} ${d[0]}</td>
+    <td style="color:var(--accent-cyan);font-family:var(--font-mono)">${d[2]}</td>
+    <td style="font-family:var(--font-mono)">${d[3]}</td>
+  </tr>`;
+});
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
