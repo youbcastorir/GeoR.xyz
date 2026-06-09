@@ -177,6 +177,9 @@
 
   let evIdx = 0;
   setInterval(() => {
+    // Don't show notifications while profile modal is open
+    const modal = document.getElementById('profileModal');
+    if (modal && modal.style.display !== 'none') return;
     battleEvents[evIdx % battleEvents.length]();
     evIdx++;
   }, 8000);

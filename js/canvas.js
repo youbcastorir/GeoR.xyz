@@ -151,6 +151,10 @@
   }
 
   function startDraw(e) {
+    // Block drawing if profile modal is open
+    const modal = document.getElementById('profileModal');
+    if (modal && !modal.classList.contains('hidden')) return;
+
     if (!state.username) { openProfileModal(); return; }
     if (state.tool === 'text') { handleTextTool(e); return; }
     if (state.tool === 'eyedrop') { handleEyedrop(e); return; }
@@ -181,9 +185,9 @@
     if (state.isDrawing) {
       state.isDrawing = false;
       updateMinimap();
-      if (state.firstStroke) {
+      if (state.firstStroke && state.username) {
         state.firstStroke = false;
-        triggerAchievement('✏️', 'First Stroke', 'You left your first mark!');
+        triggerAchievement('✏️', 'First Stroke', 'You left your first mark on the world!');
         window.addPoints && window.addPoints(10);
       }
     }

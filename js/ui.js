@@ -9,12 +9,18 @@
 
   window.openProfileModal = function () {
     const modal = document.getElementById('profileModal');
-    if (modal) modal.classList.remove('hidden');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+    }
   };
 
   window.closeProfileModal = function () {
     const modal = document.getElementById('profileModal');
-    if (modal) modal.classList.add('hidden');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+    }
   };
 
   window.startSession = function () {
@@ -228,10 +234,14 @@
 
   // ── Onboarding: show modal on first visit ──────────────────────────
   window.addEventListener('load', function() {
+    // If already have a session from sessionStorage, skip modal
+    const nick = sessionStorage.getItem('geor_nick');
+    if (nick) return;
+
     const visited = sessionStorage.getItem('geor_visited');
     if (!visited) {
       sessionStorage.setItem('geor_visited', '1');
-      setTimeout(() => openProfileModal(), 600);
+      setTimeout(() => openProfileModal(), 800);
     }
   });
 
