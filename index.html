@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoR.xyz — One World. One Canvas.</title>
+  <meta name="description" content="GeoR is a global collaborative canvas where humanity can draw, write, create, compete, and leave its mark together in real time." />
+  <meta name="keywords" content="Global Canvas, Collaborative Drawing, World Whiteboard, Online Graffiti Wall, Shared Digital Canvas, Real Time Drawing Platform, Social Art Platform" />
+  <meta name="author" content="GeoR.xyz" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://geor.xyz/" />
+  <meta property="og:title" content="GeoR.xyz — One World. One Canvas." />
+  <meta property="og:description" content="A global collaborative canvas where humanity draws together in real time. Join the world's largest shared battlefield of creativity." />
+  <meta property="og:image" content="https://geor.xyz/assets/og-image.png" />
+  <meta property="og:site_name" content="GeoR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@GeoRxyz" />
+  <meta name="twitter:title" content="GeoR.xyz — One World. One Canvas." />
+  <meta name="twitter:description" content="Draw, write, erase, compete. A global canvas battlefield. Join thousands of creators shaping the world together." />
+  <meta name="twitter:image" content="https://geor.xyz/assets/og-image.png" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "GeoR",
+    "url": "https://geor.xyz",
+    "description": "Global collaborative canvas where humanity draws, writes, creates, and competes in real time.",
+    "applicationCategory": "SocialNetworkingApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0" },
+    "contactPoint": { "@type": "ContactPoint", "email": "salatrir@gmail.com" }
+  }
+  </script>
+
+  <link rel="canonical" href="https://geor.xyz/" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- NOISE OVERLAY -->
+<div class="noise-overlay"></div>
+
+<!-- HEADER -->
+<header id="main-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <a href="index.html" class="logo-link">
+        <span class="logo-geo">Geo</span><span class="logo-r">R</span>
+        <span class="logo-dot">·</span>
+        <span class="logo-xyz">xyz</span>
+      </a>
+      <span class="tagline">One World. One Canvas.</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link active">Canvas</a>
+      <a href="pages/worldmap.html" class="nav-link">World Map</a>
+      <a href="pages/leaderboard.html" class="nav-link">Rankings</a>
+      <a href="pages/events.html" class="nav-link">Events</a>
+      <a href="pages/history.html" class="nav-link">History</a>
+      <a href="pages/contact.html" class="nav-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <div class="live-indicator">
+        <span class="pulse-dot"></span>
+        <span id="live-count">4,291</span> online
+      </div>
+      <button class="btn-join" onclick="openProfileModal()">Join the Canvas</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()">☰</button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Canvas</a>
+    <a href="pages/worldmap.html">World Map</a>
+    <a href="pages/leaderboard.html">Rankings</a>
+    <a href="pages/events.html">Events</a>
+    <a href="pages/history.html">History</a>
+    <a href="pages/contact.html">Contact</a>
+  </div>
+</header>
+
+<!-- HERO ANNOUNCEMENT BANNER -->
+<div class="event-banner">
+  <span class="event-badge">🔴 LIVE EVENT</span>
+  <span class="event-text">PIXEL WARS III — The battle for the center canvas has begun! <a href="pages/events.html">Join now →</a></span>
+  <button class="close-banner" onclick="this.parentElement.style.display='none'">✕</button>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar" id="toolbar">
+  <div class="tool-group">
+    <button class="tool-btn active" data-tool="draw" title="Pen" onclick="setTool('draw')">✏️</button>
+    <button class="tool-btn" data-tool="fill" title="Fill" onclick="setTool('fill')">🪣</button>
+    <button class="tool-btn" data-tool="text" title="Text" onclick="setTool('text')">T</button>
+    <button class="tool-btn" data-tool="erase" title="Eraser" onclick="setTool('erase')">⌫</button>
+    <button class="tool-btn" data-tool="eyedrop" title="Eyedropper" onclick="setTool('eyedrop')">💉</button>
+  </div>
+  <div class="tool-divider"></div>
+  <div class="tool-group">
+    <label class="color-label">
+      <input type="color" id="colorPicker" value="#00ffcc" onchange="setColor(this.value)" />
+      <span class="color-preview" id="colorPreview" style="background:#00ffcc"></span>
+    </label>
+    <div class="palette">
+      <span class="pal-color" style="background:#ff0040" onclick="setColor('#ff0040')"></span>
+      <span class="pal-color" style="background:#ff6600" onclick="setColor('#ff6600')"></span>
+      <span class="pal-color" style="background:#ffdd00" onclick="setColor('#ffdd00')"></span>
+      <span class="pal-color" style="background:#00ff88" onclick="setColor('#00ff88')"></span>
+      <span class="pal-color" style="background:#00ccff" onclick="setColor('#00ccff')"></span>
+      <span class="pal-color" style="background:#8800ff" onclick="setColor('#8800ff')"></span>
+      <span class="pal-color" style="background:#ff00aa" onclick="setColor('#ff00aa')"></span>
+      <span class="pal-color" style="background:#ffffff" onclick="setColor('#ffffff')"></span>
+      <span class="pal-color" style="background:#888888" onclick="setColor('#888888')"></span>
+      <span class="pal-color" style="background:#000000" onclick="setColor('#000000')"></span>
+    </div>
+  </div>
+  <div class="tool-divider"></div>
+  <div class="tool-group">
+    <label class="size-label">Size</label>
+    <input type="range" id="brushSize" min="1" max="50" value="4" oninput="setBrushSize(this.value)" />
+    <span id="sizeDisplay">4px</span>
+  </div>
+  <div class="tool-divider"></div>
+  <div class="tool-group">
+    <button class="tool-btn" title="Zoom In" onclick="zoomCanvas(1.2)">+</button>
+    <span id="zoomLevel">100%</span>
+    <button class="tool-btn" title="Zoom Out" onclick="zoomCanvas(0.8)">−</button>
+    <button class="tool-btn" title="Reset View" onclick="resetView()">⌂</button>
+  </div>
+  <div class="tool-divider"></div>
+  <div class="tool-group">
+    <button class="tool-btn tool-undo" title="Undo" onclick="undoLast()">↩</button>
+    <button class="tool-btn" title="Screenshot" onclick="takeScreenshot()">📷</button>
+    <button class="tool-btn" title="Clear My Strokes" onclick="clearMyStrokes()">🗑</button>
+  </div>
+</div>
+
+<!-- CANVAS WRAPPER -->
+<div class="canvas-wrapper" id="canvasWrapper">
+  <canvas id="globalCanvas"></canvas>
+  <canvas id="overlayCanvas"></canvas>
+  <!-- Floating user cursors -->
+  <div id="cursorsLayer"></div>
+  <!-- Territory labels -->
+  <div id="territoriesLayer"></div>
+</div>
+
+<!-- SIDE PANEL - STATS -->
+<div class="side-panel" id="sidePanel">
+  <div class="panel-section">
+    <h3 class="panel-title">🌍 Live Stats</h3>
+    <div class="stat-row"><span>Online Now</span><strong id="stat-online">4,291</strong></div>
+    <div class="stat-row"><span>Pixels Drawn Today</span><strong id="stat-pixels">12.4M</strong></div>
+    <div class="stat-row"><span>Countries Active</span><strong id="stat-countries">143</strong></div>
+    <div class="stat-row"><span>Canvas Age</span><strong>Day 47</strong></div>
+  </div>
+  <div class="panel-section">
+    <h3 class="panel-title">🔥 Trending Zones</h3>
+    <div class="zone-item" onclick="flyToZone(1200,800)">
+      <span class="zone-flag">🇧🇷</span>
+      <span class="zone-name">Brasil Corner</span>
+      <span class="zone-heat">🔥🔥🔥</span>
+    </div>
+    <div class="zone-item" onclick="flyToZone(3200,1400)">
+      <span class="zone-flag">🇯🇵</span>
+      <span class="zone-name">Tokyo Pixel Art</span>
+      <span class="zone-heat">🔥🔥</span>
+    </div>
+    <div class="zone-item" onclick="flyToZone(600,2100)">
+      <span class="zone-flag">🇺🇸</span>
+      <span class="zone-name">USA Mural Zone</span>
+      <span class="zone-heat">🔥🔥🔥</span>
+    </div>
+    <div class="zone-item" onclick="flyToZone(2800,600)">
+      <span class="zone-flag">🇩🇪</span>
+      <span class="zone-name">Deutsche Kunst</span>
+      <span class="zone-heat">🔥</span>
+    </div>
+    <div class="zone-item" onclick="flyToZone(500,1800)">
+      <span class="zone-flag">🇲🇦</span>
+      <span class="zone-name">Maroc Art</span>
+      <span class="zone-heat">🔥🔥</span>
+    </div>
+  </div>
+  <div class="panel-section">
+    <h3 class="panel-title">👑 Top Creators</h3>
+    <div class="creator-row">
+      <span class="rank-num">1</span>
+      <span class="creator-avatar">🎨</span>
+      <span class="creator-name">PixelKing_BR</span>
+      <span class="creator-pts">142k</span>
+    </div>
+    <div class="creator-row">
+      <span class="rank-num">2</span>
+      <span class="creator-avatar">🖌️</span>
+      <span class="creator-name">NeonTokyo</span>
+      <span class="creator-pts">98k</span>
+    </div>
+    <div class="creator-row">
+      <span class="rank-num">3</span>
+      <span class="creator-avatar">🌟</span>
+      <span class="creator-name">WallStreetArt</span>
+      <span class="creator-pts">87k</span>
+    </div>
+    <div class="creator-row">
+      <span class="rank-num">4</span>
+      <span class="creator-avatar">✍️</span>
+      <span class="creator-name">MoroccanBrush</span>
+      <span class="creator-pts">61k</span>
+    </div>
+  </div>
+  <div class="panel-section">
+    <h3 class="panel-title">📡 Activity Feed</h3>
+    <div id="activityFeed" class="activity-feed"></div>
+  </div>
+</div>
+
+<!-- CANVAS COORDINATES -->
+<div class="canvas-coords" id="canvasCoords">
+  <span>X: <span id="coordX">0</span></span>
+  <span>Y: <span id="coordY">0</span></span>
+  <span id="zoneLabel">Global Canvas</span>
+</div>
+
+<!-- BOTTOM MINI-MAP -->
+<div class="minimap-container">
+  <div class="minimap-header">Mini Map</div>
+  <canvas id="minimapCanvas" width="180" height="100"></canvas>
+  <div class="minimap-viewport" id="minimapViewport"></div>
+</div>
+
+<!-- USER PROFILE MODAL -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeProfileModal()">✕</button>
+    <h2 class="modal-title">Join the Canvas</h2>
+    <p class="modal-sub">Create your identity. Leave your mark on the world.</p>
+    <div class="form-group">
+      <label>Nickname</label>
+      <input type="text" id="inputNick" placeholder="e.g. PixelWarrior_MA" maxlength="24" />
+    </div>
+    <div class="form-group">
+      <label>Country</label>
+      <select id="inputCountry">
+        <option value="">— Select your country —</option>
+        <option value="MA">🇲🇦 Morocco</option>
+        <option value="US">🇺🇸 United States</option>
+        <option value="FR">🇫🇷 France</option>
+        <option value="JP">🇯🇵 Japan</option>
+        <option value="BR">🇧🇷 Brazil</option>
+        <option value="DE">🇩🇪 Germany</option>
+        <option value="EG">🇪🇬 Egypt</option>
+        <option value="IN">🇮🇳 India</option>
+        <option value="GB">🇬🇧 United Kingdom</option>
+        <option value="MX">🇲🇽 Mexico</option>
+        <option value="NG">🇳🇬 Nigeria</option>
+        <option value="ZA">🇿🇦 South Africa</option>
+        <option value="SA">🇸🇦 Saudi Arabia</option>
+        <option value="TR">🇹🇷 Turkey</option>
+        <option value="KR">🇰🇷 South Korea</option>
+        <option value="OTHER">🌍 Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Avatar Color</label>
+      <div class="avatar-colors">
+        <span class="av-color selected" style="background:#00ffcc" data-color="#00ffcc" onclick="selectAvatarColor(this)"></span>
+        <span class="av-color" style="background:#ff0040" data-color="#ff0040" onclick="selectAvatarColor(this)"></span>
+        <span class="av-color" style="background:#ff6600" data-color="#ff6600" onclick="selectAvatarColor(this)"></span>
+        <span class="av-color" style="background:#8800ff" data-color="#8800ff" onclick="selectAvatarColor(this)"></span>
+        <span class="av-color" style="background:#ffdd00" data-color="#ffdd00" onclick="selectAvatarColor(this)"></span>
+        <span class="av-color" style="background:#ff00aa" data-color="#ff00aa" onclick="selectAvatarColor(this)"></span>
+      </div>
+    </div>
+    <button class="btn-start" onclick="startSession()">Enter the Canvas →</button>
+  </div>
+</div>
+
+<!-- TEXT INPUT POPUP -->
+<div class="text-popup" id="textPopup" style="display:none">
+  <input type="text" id="textInput" placeholder="Type and press Enter..." />
+  <div class="text-options">
+    <select id="fontSelect">
+      <option value="Orbitron">Orbitron</option>
+      <option value="Space Mono">Mono</option>
+      <option value="Rajdhani">Rajdhani</option>
+      <option value="serif">Serif</option>
+    </select>
+    <input type="range" id="textSize" min="10" max="80" value="20" />
+    <button onclick="placeText()">Place</button>
+    <button onclick="cancelText()">✕</button>
+  </div>
+</div>
+
+<!-- NOTIFICATION TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ACHIEVEMENT POPUP -->
+<div class="achievement-popup" id="achievementPopup">
+  <div class="ach-icon" id="achIcon">🏆</div>
+  <div class="ach-text">
+    <div class="ach-title" id="achTitle">Achievement Unlocked!</div>
+    <div class="ach-desc" id="achDesc">First Stroke</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">GeoR<span class="footer-dot">·</span>xyz</span>
+      <p>GeoR.xyz is a global collaborative canvas where humanity can create, compete, communicate, and leave its mark together.</p>
+      <div class="footer-social">
+        <a href="#" title="Twitter/X">𝕏</a>
+        <a href="#" title="Discord">💬</a>
+        <a href="#" title="Reddit">🔴</a>
+        <a href="#" title="GitHub">⌨</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4>Navigate</h4>
+      <a href="index.html">Canvas</a>
+      <a href="pages/worldmap.html">World Map</a>
+      <a href="pages/leaderboard.html">Leaderboard</a>
+      <a href="pages/events.html">Events</a>
+      <a href="pages/history.html">History</a>
+    </div>
+    <div class="footer-links">
+      <h4>Community</h4>
+      <a href="#">Discord Server</a>
+      <a href="#">Reddit Community</a>
+      <a href="#">Twitter/X</a>
+      <a href="#">GitHub</a>
+    </div>
+    <div class="footer-links">
+      <h4>Support</h4>
+      <a href="pages/contact.html">Contact Us</a>
+      <a href="#">FAQ</a>
+      <a href="#">Moderation</a>
+      <a href="#">Report Content</a>
+      <a href="#" class="footer-email">salatrir@gmail.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 GeoR.xyz — All rights reserved.</span>
+    <span>Built for the world, by the world.</span>
+  </div>
+</footer>
+
+<script src="js/canvas.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/simulation.js"></script>
+</body>
+</html>

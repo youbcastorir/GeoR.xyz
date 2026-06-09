@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geor.xyz/sitemap.xml
+
+# GeoR.xyz — Global Collaborative Canvas
+# One World. One Canvas.
+# Contact: salatrir@gmail.com
